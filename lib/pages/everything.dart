@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:finalnewsapiproject/constants/build_widget.dart';
 import 'package:finalnewsapiproject/models/everything_model.dart';
 import 'package:finalnewsapiproject/network/resp_obj.dart';
+import 'package:finalnewsapiproject/pages/details_page.dart';
 import 'package:finalnewsapiproject/providers/everything_provider.dart';
 import 'package:finalnewsapiproject/providers/headline_provider.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,8 @@ class _EverythingPageState extends State<EverythingPage> {
     context.read<EverythingProvider>().getApiData();
   }
 
+  TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,8 +46,30 @@ class _EverythingPageState extends State<EverythingPage> {
                 List<EverythingModel> articles = response.data;
                 return Column(children: <Widget>[
                   Container(
-                    padding: const EdgeInsets.only(
-                        top: 20, left: 15, right: 15, bottom: 10),
+                    padding: const EdgeInsets.only(left: 15, right: 5),
+                    margin: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black54, width: 1),
+                        borderRadius: BorderRadius.circular(20)),
+                    width: MediaQuery.of(context).size.width,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.75,
+                          child: TextField(
+                            controller: controller,
+                            decoration: const InputDecoration(
+                                hintText: "Search News",
+                                border: InputBorder.none),
+                          ),
+                        ),
+                        const Icon(Icons.search),
+                      ],
+                    ),
+                    // child: const SearchPage(),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(left: 20),
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -62,8 +87,7 @@ class _EverythingPageState extends State<EverythingPage> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.only(
-                        top: 0, left: 15, right: 15, bottom: 5),
+                    padding: const EdgeInsets.only(left: 20, bottom: 10),
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -152,11 +176,13 @@ class _EverythingPageState extends State<EverythingPage> {
                                         ),
                                       ),
                                       title: Text(
+                                        maxLines: 2,
                                         article.title.toString(),
                                         style: const TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
                                       subtitle: Text(
+                                        maxLines: 2,
                                         article.author.toString(),
                                         style: const TextStyle(
                                             fontWeight: FontWeight.bold),
@@ -236,44 +262,6 @@ class _EverythingPageState extends State<EverythingPage> {
             }
           },
         ),
-      ),
-    );
-  }
-}
-
-class DetailsPage extends StatelessWidget {
-  final EverythingModel apiModel;
-  const DetailsPage({super.key, required this.apiModel});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        children: [
-          Text(
-            apiModel.title.toString().toUpperCase(),
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Text(
-            apiModel.content.toString(),
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.normal,
-            ),
-          ),
-          SizedBox(
-            width: double.infinity,
-            height: 200,
-            child: CachedNetworkImage(
-              imageUrl: apiModel.urlToImage.toString(),
-              fit: BoxFit.cover,
-            ),
-          ),
-        ],
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finalnewsapiproject/models/everything_model.dart';
 import 'package:finalnewsapiproject/network/resp_obj.dart';
-import 'package:finalnewsapiproject/pages/everything.dart';
+import 'package:finalnewsapiproject/pages/details_page.dart';
 import 'package:finalnewsapiproject/providers/everything_provider.dart';
 import 'package:flutter/material.dart';
 
