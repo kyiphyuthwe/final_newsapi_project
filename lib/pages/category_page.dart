@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:finalnewsapiproject/models/headline_model.dart';
+import 'package:finalnewsapiproject/models/everything_model.dart';
 import 'package:finalnewsapiproject/network/resp_obj.dart';
-import 'package:finalnewsapiproject/pages/details_page_headline.dart';
+import 'package:finalnewsapiproject/pages/details_page.dart';
 import 'package:finalnewsapiproject/providers/headline_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +36,7 @@ class _CategoryPageState extends State<CategoryPage> {
               return const Center(child: CircularProgressIndicator());
             } else if (response.apiState == ApiState.success) {
               if (response.data != null) {
-                List<HeadlineModel> articles = response.data;
+                List<EverythingModel> articles = response.data;
                 return ListView.builder(
                   itemCount: articles.length,
                   itemBuilder: (context, index) {
@@ -45,8 +45,7 @@ class _CategoryPageState extends State<CategoryPage> {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (_) =>
-                                DetailsPageHeadline(apiModel: article),
+                            builder: (_) => DetailsPage(apiModel: article),
                           ),
                         );
                       },

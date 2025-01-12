@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:finalnewsapiproject/constants/build_widget.dart';
-import 'package:finalnewsapiproject/models/headline_model.dart';
+import 'package:finalnewsapiproject/models/everything_model.dart';
 import 'package:finalnewsapiproject/network/resp_obj.dart';
 import 'package:finalnewsapiproject/pages/category_page.dart';
 import 'package:finalnewsapiproject/providers/headline_provider.dart';
@@ -62,7 +62,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           return const Center(child: CircularProgressIndicator());
         } else if (response.apiState == ApiState.success) {
           if (response.data != null) {
-            List<HeadlineModel> articles = response.data;
+            List<EverythingModel> articles = response.data;
             return SafeArea(
               child: Column(children: [
                 Container(
